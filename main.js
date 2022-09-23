@@ -27,9 +27,7 @@ AddBtn.onclick = () => {
         alert("Please input a task")
     } else {
 
-        const task = {
-            mainValue: InputValue.value
-        }
+        const task =  InputValue.value
 
 
         var taskEl = document.createElement('li')
@@ -69,12 +67,13 @@ AddBtn.onclick = () => {
         taskElTen.appendChild(taskElTwelve)
         taskElTwelve.innerHTML = 'edit';
 
-        taskElEight.innerHTML = task.mainValue;
+        taskElEight.innerHTML = task;
 
         InputValue.value = "";
 
         //localstorage
         localStorage.setItem('task', taskWrapper.innerHTML)
+        // localStorage.clear()
 
     }
 
