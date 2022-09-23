@@ -2,7 +2,7 @@
 
 const deleteBtn = document.querySelector('.delete-container')
 // const taskEl  = document.querySelector('.task-container')
-var taskId  = 0
+var taskId = 0
 const editBtn = document.getElementsByClassName('edit-btn')
 const taskDetails = document.querySelector('.Task-details')
 const InputValue = document.getElementById('Task-input')
@@ -22,12 +22,15 @@ var taskElTwelve = document.createElement('button')
 
 
 
-AddBtn.onclick = () =>{
-    if(InputValue.value.trim() == ""){
+AddBtn.onclick = () => {
+    if (InputValue.value.trim() == "") {
         alert("Please input a task")
-    }else{
+    } else {
 
-        const task = InputValue.value
+        const task = {
+            mainValue: InputValue.value
+        }
+
 
         var taskEl = document.createElement('li')
         var taskElOne = document.createElement('div')
@@ -39,7 +42,7 @@ AddBtn.onclick = () =>{
         var taskElTen = document.createElement('div')
         var taskElElven = document.createElement('i')
         var taskElTwelve = document.createElement('button')
-        
+
 
 
         taskElOne.className = "task-one-container"
@@ -51,7 +54,7 @@ AddBtn.onclick = () =>{
         taskElNine.className = 'delete-container'
         taskElTen.className = 'edit-container'
         taskElElven.className = 'fa fa-trash-o'
-        taskElTwelve.className ='edit-btn'
+        taskElTwelve.className = 'edit-btn'
 
 
         taskWrapper.append(taskEl)
@@ -64,13 +67,14 @@ AddBtn.onclick = () =>{
         taskElSeven.appendChild(taskElTen)
         taskElNine.appendChild(taskElElven)
         taskElTen.appendChild(taskElTwelve)
-        taskElTwelve.innerHTML = 'edit'
-        taskElEight.innerHTML = task
+        taskElTwelve.innerHTML = 'edit';
+
+        taskElEight.innerHTML = task.mainValue;
 
         InputValue.value = "";
-        
+
         //localstorage
-        localStorage.setItem('task',taskWrapper.innerHTML) 
+        localStorage.setItem('task', taskWrapper.innerHTML)
 
     }
 
@@ -82,14 +86,14 @@ taskWrapper.innerHTML = localStorage.getItem('task')
 
 taskWrapper.addEventListener('click', function (e) {
     if (e.target.className === 'delete-container') {
-      console.log(e.target.parentElement.parentElement.parentElement.remove());  
-      taskId = 0
-    }else if(e.target.className === 'edit-btn'){
-        InputValue.value =  e.target.parentElement.parentElement.previousElementSibling.firstChild.innerHTML
+        console.log(e.target.parentElement.parentElement.parentElement.remove());
+        taskId = 0
+    } else if (e.target.className === 'edit-btn') {
+        InputValue.value = e.target.parentElement.parentElement.previousElementSibling.firstChild.innerHTML
         e.target.parentElement.parentElement.parentElement.remove()
         InputValue.focus()
     }
-} )
+})
 
 
 // STORING TASKS WITH LOCAL STORAGE
